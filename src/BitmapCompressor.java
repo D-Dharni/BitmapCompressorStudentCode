@@ -32,9 +32,46 @@ public class BitmapCompressor {
      * and writes the results to standard output.
      */
     public static void compress() {
-
         // TODO: complete compress()
 
+        // Variable to keep track of how many 0/1s in a row
+        int currentRun = 0;
+
+        // Set for beginning = false (0)
+        boolean standardBit = false;
+
+        while (!BinaryStdIn.isEmpty()) {
+            // Read in first bit
+            boolean bit = BinaryStdIn.readBoolean();
+
+            if (standardBit != bit) {
+                // Some code to add that run to the output file
+                BinaryStdOut.write(currentRun, 8);
+
+                // Reset run
+                currentRun = 0;
+
+                // Flip oldBit
+                standardBit = !standardBit;
+            }
+            else {
+                // The maximum value that can be represented w/8 bits
+                if (currentRun == 255) {
+                    BinaryStdOut.write(currentRun, 8);
+
+                    // Write out 0 to keep same bit
+                    BinaryStdOut.write(0, 8);
+
+                    // Reset run
+                    currentRun = 1;
+                }
+                else {
+                    currentRun++;
+                }
+            }
+        }
+        // write in the final currentRun
+        BinaryStdOut.write(currentRun, 8);
         BinaryStdOut.close();
     }
 
@@ -43,8 +80,21 @@ public class BitmapCompressor {
      * and writes the results to standard output.
      */
     public static void expand() {
-
         // TODO: complete expand()
+        boolean standardBit = false;
+
+        while (!BinaryStdIn.isEmpty()) {
+            // Save 8 bit chunks
+            int numRepeats = BinaryStdIn.readInt(8);
+
+            // Read all the 0s or 1s into the out
+            for (int i = 0; i < numRepeats; i++) {
+                BinaryStdOut.write(standardBit);
+            }
+
+            // Flip
+            standardBit = !standardBit;
+        }
 
         BinaryStdOut.close();
     }
