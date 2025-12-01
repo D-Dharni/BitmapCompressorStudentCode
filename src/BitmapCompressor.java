@@ -23,7 +23,7 @@
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  *  @author Zach Blick
- *  @author YOUR NAME HERE
+ *  @author Deven Dharni
  */
 public class BitmapCompressor {
 
@@ -32,8 +32,6 @@ public class BitmapCompressor {
      * and writes the results to standard output.
      */
     public static void compress() {
-        // TODO: complete compress()
-
         // Variable to keep track of how many 0/1s in a row
         int currentRun = 0;
 
@@ -80,7 +78,6 @@ public class BitmapCompressor {
      * and writes the results to standard output.
      */
     public static void expand() {
-        // TODO: complete expand()
         boolean standardBit = false;
 
         while (!BinaryStdIn.isEmpty()) {
@@ -98,7 +95,6 @@ public class BitmapCompressor {
 
         BinaryStdOut.close();
     }
-
     /**
      * When executed at the command-line, run {@code compress()} if the command-line
      * argument is "-" and {@code expand()} if it is "+".
