@@ -49,7 +49,7 @@ public class BitmapCompressor {
                 BinaryStdOut.write(currentRun, 8);
 
                 // Reset run
-                currentRun = 0;
+                currentRun = 1;
 
                 // Flip oldBit
                 standardBit = !standardBit;
